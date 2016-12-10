@@ -19,11 +19,50 @@ namespace TravianTool.Janelas
     /// </summary>
     public partial class LocalizarFarmsWindow : Window
     {
+        private List<string> tribos = new List<string> {"Romano","Teutão","Gaulês", "Natarianos"};  
+
         public LocalizarFarmsWindow()
         {
             InitializeComponent();
         }
 
+        private string NomeAldeia { get; set; }
+        private int PopMin { get; set; }
+        private int PopMax { get; set; }
+        private string TriboSelecionada { get; set; }
+        private int Distancia { get; set; }
 
+
+        private void ComboBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            var cb = sender as ComboBox;
+            cb.ItemsSource = tribos;
+            cb.SelectedIndex = 0;
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TriboSelecionada = (sender as ComboBox).SelectedItem as string;
+        }
+
+        private void tbAldeia_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            NomeAldeia = (sender as TextBox).Text;
+        }
+
+        private void tbPopMin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PopMin = int.Parse((sender as TextBox).Text);
+        }
+
+        private void tbPopMax_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PopMax = int.Parse((sender as TextBox).Text);
+        }
+
+        private void tbDist_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Distancia = int.Parse((sender as TextBox).Text);
+        }
     }
 }

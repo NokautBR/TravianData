@@ -9,28 +9,24 @@
     <Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20" >
-            <TextBox Text="{Binding NomeAldeia}" ToolTip="Nome da Aldeia" MinWidth="100"></TextBox>
+            <TextBox ToolTip="Nome da Aldeia" Name="tbAldeia" MinWidth="100" TextChanged="tbAldeia_TextChanged"></TextBox>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock>População</TextBlock>
-                <TextBox Text="{Binding PopMin}" ToolTip="População Minima" MinWidth="50"></TextBox>
-                    <TextBox Text="{Binding PopMax}" ToolTip="População Máxima" MinWidth="50"></TextBox>                
-            </StackPanel>            
-            <ComboBox ToolTip="Tribo" MinWidth="100">
-                <ComboBoxItem>Romano</ComboBoxItem>
-                <ComboBoxItem>Teutão</ComboBoxItem>
-                <ComboBoxItem>Gaulês</ComboBoxItem>
-                <ComboBoxItem>Natar</ComboBoxItem>
-            </ComboBox>
-                <TextBox Text="{Binding Distancia}" ToolTip="Distância Máxima da sua Aldeia" MinWidth="100"></TextBox>
+                    <TextBox ToolTip="População Minima" Name="tbPopMin" MinWidth="50" TextChanged="tbPopMin_TextChanged"></TextBox>
+                    <TextBox ToolTip="População Máxima" Name="tbPopMax" MinWidth="50" TextChanged="tbPopMax_TextChanged"></TextBox>                
+            </StackPanel>
+                <ComboBox Text="Tribos" MinWidth="100" Loaded="ComboBox_Loaded" SelectionChanged="ComboBox_SelectionChanged">
+                </ComboBox>
+                <TextBox Text="{Binding Distancia}" ToolTip="Distância Máxima da sua Aldeia" Name="tbDist" MinWidth="100" TextChanged="tbDist_TextChanged"></TextBox>
             <Button>Pesquisar</Button>
         </StackPanel>
             <DataGrid ItemsSource="{Binding Aldeias}" HorizontalAlignment="Center" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Path=ProductID}" Header="Aldeia" />
-                    <DataGridTextColumn Binding="{Binding Path=ProductID}" Header="População" />
-                    <DataGridTextColumn Binding="{Binding Path=ProductID}" Header="Tribo" />
-                    <DataGridTextColumn Binding="{Binding Path=ProductID}" Header="Distância" />
-                    <DataGridTextColumn Binding="{Binding Path=ProductID}" Header="Link" />
+                    <DataGridTextColumn Binding="{Binding Path=Aldeia}" Header="Aldeia" />
+                    <DataGridTextColumn Binding="{Binding Path=Pop}" Header="População" />
+                    <DataGridTextColumn Binding="{Binding Path=Tribo}" Header="Tribo" />
+                    <DataGridTextColumn Binding="{Binding Path=Dist}" Header="Distância" />
+                    <DataGridTextColumn Binding="{Binding Path=Link}" Header="Link" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

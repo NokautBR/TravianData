@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravianTool.Janelas"
         mc:Ignorable="d"
-        Title="LocalizarFarmsWindow" Height="400" Width="600">
+        Title="LocalizarFarmsWindow" Height="400" Width="600" Loaded="Window_Loaded">
     <Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20" >
@@ -30,5 +30,8 @@
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
+        <StatusBar VerticalAlignment="Bottom">
+            <TextBlock Name="status"></TextBlock>
+        </StatusBar>
     </Grid>
 </Window>

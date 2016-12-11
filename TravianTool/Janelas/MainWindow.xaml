@@ -5,10 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravianTool"
         mc:Ignorable="d"
-        Title="Travian Tool" Height="300" Width="200">
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-        <Button Click="Button_Click">
-            Localizar Farms
-        </Button>
-    </StackPanel>
+        Title="Travian Tool" Height="300" Width="200" Loaded="Window_Loaded">
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <Button Click="Button_Click">
+                Localizar Farms
+            </Button>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+            <StatusBar VerticalAlignment="Bottom">
+                <TextBlock Name="status"></TextBlock>
+            </StatusBar>
+        </StackPanel>
+    </Grid>
+
 </Window>

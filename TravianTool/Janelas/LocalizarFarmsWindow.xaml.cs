@@ -64,5 +64,15 @@ namespace TravianTool.Janelas
         {
             Distancia = int.Parse((sender as TextBox).Text);
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Controle.ControleConsulta.statusMapa += Status;
+        }
+
+        private void Status(object sender, object e)
+        {
+            status.Text = e as string;
+        }
     }
 }

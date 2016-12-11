@@ -31,5 +31,16 @@ namespace TravianTool
             LocalizarFarmsWindow windows = new LocalizarFarmsWindow();
             windows.ShowDialog();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Controle.ControleConsulta.DownloadMapa();
+            Controle.ControleConsulta.statusMapa += Status;
+        }
+
+        private void Status(object sender, object e)
+        {
+            status.Text = e as string;
+        }
     }
 }

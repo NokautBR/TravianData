@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Controls;
+using TravianTool.Controle;
 
 namespace TravianData
 {
@@ -15,7 +14,14 @@ namespace TravianData
         public void GetSqlFile()
         {
             WebClient client = new WebClient();
-            client.DownloadFileAsync(new Uri("http://ts2.travian.com.br/map.sql"), @"Dados\Map.sql");
+            client.DownloadFileCompleted += ControleConsulta.Client_DownloadFileCompleted;
+            client.DownloadProgressChanged += ControleConsulta.Client_DownloadProgressChanged;
+            Directory.CreateDirectory("Dados");
+            FileInfo fi = new FileInfo(@"Dados\Map.sql");
+            TimeSpan dias = DateTime.Now.Date - fi.CreationTime.Date.AddDays(1);
+            if (dias.Days >= 1)
+                client.DownloadFileAsync(new Uri("http://ts2.travian.com.br/map.sql"), @"Dados\Map.sql");
+
         }
 
         private string[] LoadSqlFile()
@@ -28,24 +34,28 @@ namespace TravianData
             return null;
         }
 
-        public void PopulaBanco()
+        public void PopulaBanco(ProgressBar progresso)
         {
-            SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFileName=|DataDirectory|DatabaseTravian.mdf;Integrated Security=True;User Instance=True");
+            string conexao = ConfigurationManager.ConnectionStrings["DataBase"].ConnectionString;
+            SqlConnection con = new SqlConnection(conexao);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
             con.Open();
-
-            foreach (var linha in LoadSqlFile())
+            string[] querys = LoadSqlFile();
+            for (var linha = 0; linha < querys.Length; linha++)
             {
                 //Remove the back tick from the name of the table, because this only
                 //works with MySQL, in SQL Server this throws an error
-                //line = line.Replace("`", "");
-
-                cmd.CommandText = linha;
+                querys[linha] = querys[linha].Replace("`", "");
+                
+                cmd.CommandText = querys[linha];
                 cmd.ExecuteNonQuery();
+                progresso.Value = (linha * 100 / querys.Length);
             }
 
             con.Close();
         }
+
+
     }
 }

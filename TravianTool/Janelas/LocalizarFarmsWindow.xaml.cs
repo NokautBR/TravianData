@@ -19,7 +19,7 @@ namespace TravianTool.Janelas
     /// </summary>
     public partial class LocalizarFarmsWindow : Window
     {
-        private List<string> tribos = new List<string> {"Romano","Teutão","Gaulês", "Natarianos"};  
+        private List<string> tribos = new List<string> {"Todos","Romano","Teutão","Gaulês", "Natarianos"};  
 
         public LocalizarFarmsWindow()
         {
@@ -29,7 +29,7 @@ namespace TravianTool.Janelas
         private string NomeAldeia { get; set; }
         private int PopMin { get; set; }
         private int PopMax { get; set; }
-        private string TriboSelecionada { get; set; }
+        private int TriboSelecionada { get; set; }
         private int Distancia { get; set; }
 
 
@@ -42,7 +42,7 @@ namespace TravianTool.Janelas
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TriboSelecionada = (sender as ComboBox).SelectedItem as string;
+            TriboSelecionada = (sender as ComboBox).SelectedIndex;
         }
 
         private void tbAldeia_TextChanged(object sender, TextChangedEventArgs e)
@@ -73,6 +73,12 @@ namespace TravianTool.Janelas
         private void Status(object sender, object e)
         {
             status.Text = e as string;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string consulta = NomeAldeia +'|'+ PopMin + '|' + PopMax + '|' + TriboSelecionada + '|' + Distancia;
+            Controle.ControleConsulta.EfetuaConsulta(consulta);
         }
     }
 }

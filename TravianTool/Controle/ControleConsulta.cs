@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using TravianData;
+using TravianTool.Dominio;
 
 namespace TravianTool.Controle
 {
@@ -51,6 +52,19 @@ namespace TravianTool.Controle
         {
             LoadMapSql map = new LoadMapSql();
             map.GetSqlFile();
+        }
+
+        static public void EfetuaConsulta(string consulta)
+        {
+            string[] filtros = consulta.Split('|');
+            ConsultaBD consultaBD = new ConsultaBD();
+            if (!string.IsNullOrEmpty(filtros[0])) consultaBD.AddNomeAldeia(filtros[0]);
+            if (!filtros[1].Equals("0")) consultaBD.AddPopMin(int.Parse(filtros[1]));
+            if (!filtros[1].Equals("0")) consultaBD.AddPopMax(int.Parse(filtros[2]));
+            if (!filtros[1].Equals("0")) consultaBD.AddTribo(int.Parse(filtros[3]));
+            if (!filtros[1].Equals("0")) consultaBD.AddDistancia(int.Parse(filtros[4]));
+
+            consultaBD.EfetuaConsulta();
         }
     }
 }

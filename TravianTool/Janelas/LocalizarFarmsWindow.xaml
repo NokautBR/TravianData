@@ -18,7 +18,7 @@
                 <ComboBox Text="Tribos" MinWidth="100" Loaded="ComboBox_Loaded" SelectionChanged="ComboBox_SelectionChanged">
                 </ComboBox>
                 <TextBox Text="{Binding Distancia}" ToolTip="Distância Máxima da sua Aldeia" Name="tbDist" MinWidth="100" TextChanged="tbDist_TextChanged"></TextBox>
-            <Button>Pesquisar</Button>
+            <Button Click="Button_Click">Pesquisar</Button>
         </StackPanel>
             <DataGrid ItemsSource="{Binding Aldeias}" HorizontalAlignment="Center" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True">
                 <DataGrid.Columns>
